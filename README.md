@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# Making a Tic Tac Toe Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a tic tac toe game made with react and typescript
+The logic for the game is we take an array of 9 elements and keep the initial value as null
+And using the useState Hook we can change the value of the array by clicking on the block
+and by default we keep the X value first
 
-Currently, two official plugins are available:
+# Managing State in Parent and Using onClick in Child
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+When your state is managed in a parent component or elsewhere (like a global store) and you need to handle an onClick event in a child component while rendering it dynamically, you pass the handler function and relevant state values as props.
 
-## Expanding the ESLint configuration
+Yes, the provided Block component is a good example of the concept where the state is managed externally, and the onClick handler is passed down as a prop. The component itself is stateless, and it relies on props to determine its behavior and rendering.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# Explanation of Your Code
 
-- Configure the top-level `parserOptions` property like this:
+# Interface for Props
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+The BlockProps interface defines the expected props:
+value: string | null - Represents the value displayed inside the block.
+onClick: () => void - A callback function triggered when the block is clicked.
+Rendering and onClick Handling
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The onClick handler is invoked when the div is clicked, but the logic of what happens during the click (e.g., updating state) is handled in the parent component.
+Reusability
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The Block component is reusable and doesn't care about where its state or click handler comes from. It only needs the value and onClick passed as props.
