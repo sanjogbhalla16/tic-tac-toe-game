@@ -41,6 +41,11 @@ function App() {
       return;
     }
 
+    if (!stateCopy.includes(null)) {
+      alert("Game is draw");
+      return;
+    }
+
     setCurrentTurn(currentTurn === "X" ? "O" : "X"); // updating the current turn
   };
 
